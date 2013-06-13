@@ -1,0 +1,16 @@
+"SmallLibrary" :
+  "classes" :
+      "A" :
+        "methods"   :
+           "someNumber" :
+               "return" : "int"
+               "args"   :
+           "doThis" :
+               "return" : "void"
+               "args" : "int"
+        "constructors" :
+           "A" :
+             "args" :
+        "properties"   :
+           "_someNumber" :
+              "type" : "int"

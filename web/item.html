@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<element name="dartdoc-item" constructor="ItemElement" extends="article"  
+    apply-author-styles>
+  <template>
+    <h1 on-click="print(title)">{{title}}</h1> 
+  </template>
+  <script type="application/dart">
+    import 'package:web_ui/web_ui.dart';
+    import 'package:dartdoc_viewer/item.dart';
+    import 'app.dart' as app;
+    
+    /**
+     * An HTML representation of a Item. 
+     *
+     * Used as a placeholder for an CategoryItem object. 
+     */
+    class ItemElement extends WebComponent {
+      Item item;
+      
+      String get title => item.name;
+    }
+  </script>
+</element>

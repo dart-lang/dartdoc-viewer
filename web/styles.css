@@ -1,0 +1,97 @@
+/* Apply a natural box layout model to all elements. */
+* { 
+  -moz-box-sizing: border-box; 
+  -webkit-box-sizing: border-box; 
+  box-sizing: border-box; 
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  font: 12px Open Sans, Lucida Sans Unicode, Lucida Grande, sans-serif;
+  color: #333;
+}
+
+body {
+  margin: 0;
+}
+
+/*
+  The combination of pre followed by code signifies a fragment of code example. 
+  This puts the code in a surrounded grey box with horizontal scroll. 
+*/
+pre code {
+  font: 1rem Menlo, Monaco, Consolas, Courier, monospace;
+  display: block;
+  background: #fcfcfc;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  -webkit-border-radius: 4px; 
+  -moz-border-radius: 4px;
+  padding: 2%;
+  overflow-x: auto; 
+}
+
+nav {
+  background: #efefef;
+  font: 1.2rem;
+  padding: 1%;
+}
+
+.breadcrumbs {
+  overflow: hidden;
+  padding: 1%;
+  margin: 0;
+}
+
+.breadcrumbs a {
+  float: left;
+  padding: 1%;
+}
+
+.breadcrumbs a:before {
+  content: ' / ';
+}
+
+main h1 {
+  padding-left: 2%;
+}
+
+main .description {
+  font: italic .8rem; 
+}
+
+.description {
+  padding: 0 2% 2% 4%;
+}
+
+.category summary {
+  padding: 2%;
+  font-size: 1.2rem;
+}
+
+.category article {
+  width: 100%;
+  padding: 2%;
+  background: #fdfdfd;
+  border-bottom: 1px solid #ddd;
+  -webkit-box-shadow: inset 0 0 15px rgba(0, 0, 0, .05);
+  -moz-box-shadow: inset 0 0 15px rgba(0, 0, 0, .05);
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, .05);
+}
+
+.category article:FOCUS,
+.category article:ACTIVE,
+.category article:HOVER {
+  opacity: .7;
+  text-decoration: underline;
+}
+
+.category article h1 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.category .category {
+  padding-left: 3%;
+}

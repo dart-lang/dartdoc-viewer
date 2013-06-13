@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<link rel="import" href="item.html">
+<link rel="import" href="literal.html">
+
+<element name="dartdoc-category" constructor="CategoryElement" extends="details" 
+    apply-author-styles>     
+  <template>
+    <summary>{{title}}</summary>      
+    <template iterate="item in category.content">
+      <template if="item is Item">
+        <dartdoc-item item="{{item}}"></dartdoc-item>
+      </template>
+      
+      <template if="item is Literal">
+        <dartdoc-literal literal="{{item}}"></dartdoc-literal>
+      </template>
+      
+      <template if="item is Category">
+        <dartdoc-category category="{{item}}" class="category"></dartdoc-category>
+      </template>
+    </template>
+  </template>
+  
+  <script type="application/dart">
+    import 'package:web_ui/web_ui.dart';
+    import 'package:dartdoc_viewer/item.dart';
+    import 'app.dart' as app;
+    
+    /**
+     * An HTML representation of a Category. 
+     *
+     * Used as a placeholder for an CategoryItem object. 
+     */
+    class CategoryElement extends WebComponent {
+      CategoryItem category;
+      
+      String get title => category.name;
+    }
+
+  </script>
+</element>

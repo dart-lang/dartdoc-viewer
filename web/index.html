@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Dart API Reference</title>
+
+<link rel="stylesheet" href="styles.css">
+<link rel="import" href="category.html">
+
+<script type="application/dart" src="app.dart"></script>
+<script src="packages/browser/dart.js"></script>
+
+<nav class="breadcrumbs">
+  <a href="#">dart:io</a>
+  <a href="#">File</a>
+</nav>
+
+<!-- TODO(janicejl): get breadcrumb path from parsed yaml. -->
+<main>
+  <h1>{{title}}</h1>
+  <section class="description">
+    File objects are references to files.
+  </section>
+  
+  <template instantiate="if currentPage != null">
+    <template iterate="category in currentPage.content">
+      <dartdoc-category category="{{category}}" class="category"></dartdoc-category>
+    </template>
+  </template>
+  
+</main>

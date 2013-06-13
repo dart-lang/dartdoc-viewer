@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<element name="dartdoc-literal" constructor="LiteralElement" extends="div"  
+    apply-author-styles>
+  <template>
+    <p class="description">{{content}}</p>
+  </template>
+  <script type="application/dart">
+    import 'package:web_ui/web_ui.dart';
+    import 'package:dartdoc_viewer/item.dart';
+    import 'app.dart' as app;
+    
+    /**
+     * An HTML representation of a Literal. 
+     *
+     * Used as a placeholder for an CategoryItem object. 
+     */
+    class LiteralElement extends WebComponent {
+      Literal literal;
+      
+      String get content => literal.content;
+    }
+  </script>
+</element>
