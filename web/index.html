@@ -1,41 +1,29 @@
 <!DOCTYPE html>
+<meta charset="utf-8">
+<title>Dart API Reference</title>
 
-<html>
-  <head>
-    <title>Dart API Reference</title>
-    
-    <!-- Viewport meta tag controls the layout on mobile devices. -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, 
-       maximum-scale=1, user-scalable=no">
-    
-    <link rel="stylesheet" href="styles.css">
-    
-    <!-- Importing the doc-section component for use below. -->
-    <link rel="import" href="section.html">
-    
-    <script type="application/dart" src="app.dart"></script>
-    
-    <script src="packages/browser/dart.js"></script>
-    
-  </head>
- 
-  <body>   
-    
-    <nav>
-      dart:io / File
-    </nav>
-    
-    <div class="main">
-      <!-- Title of the class page. -->
-      <div class="page-title">File abstract class</div>
-      <!-- Description of the class. -->
-      <div class="description">File objects are references to files.</div>
-        
-      <template iterate="section in dummySections">
-        <doc-section section="{{section}}"></doc-section>
-      </template>
-      
-    </div>
-    
-  </body>
-</html>
+<link rel="stylesheet" href="styles.css">
+<link rel="import" href="category.html">
+
+<script type="application/dart" src="app.dart"></script>
+<script src="packages/browser/dart.js"></script>
+
+<nav class="breadcrumbs">
+  <a href="#">dart:io</a>
+  <a href="#">File</a>
+</nav>
+
+<!-- TODO(janicejl): get breadcrumb path from parsed yaml. -->
+<main>
+  <h1>{{title}}</h1>
+  <section class="description">
+    File objects are references to files.
+  </section>
+  
+  <template instantiate="if currentPage != null">
+    <template iterate="category in currentPage.content">
+      <dartdoc-category category="{{category}}" class="category"></dartdoc-category>
+    </template>
+  </template>
+  
+</main>

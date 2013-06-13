@@ -1,0 +1,101 @@
+"DummyLibrary" : 
+  "classes" : 
+    "A" : 
+      "constructors" : 
+        "A" : 
+          "operator" : "false"
+          "parameters" : 
+          "comment" : "null"
+          "rtype" : "dynamic"
+          "static" : "false"
+      "variables" : 
+        "_someNumber" : 
+          "final" : "false"
+          "comment" : "null"
+          "static" : "false"
+          "type" : "int"
+        "testNum" : 
+          "final" : "false"
+          "comment" : "null"
+          "static" : "false"
+          "type" : "int"
+      "getters" : 
+        "someNumber" : 
+          "operator" : "false"
+          "parameters" : 
+          "comment" : "null"
+          "rtype" : "int"
+          "static" : "false"
+      "interfaces" : 
+        - "B"
+      "comment" : "Doc comment for class A."
+      "superclass" : "Object"
+      "abstract" : "false"
+      "methods" : 
+        "doThis" : 
+          "operator" : "false"
+          "parameters" : 
+            "a" : 
+              "type" : "int"
+              "optional" : "false"
+              "default" : "null"
+          "comment" : "null"
+          "rtype" : "void"
+          "static" : "false"
+        "multi" : 
+          "operator" : "false"
+          "parameters" : 
+            "a" : 
+              "type" : "int"
+              "optional" : "false"
+              "default" : "null"
+          "comment" : "null"
+          "rtype" : "int"
+          "static" : "false"
+    "B" : 
+      "interfaces" : 
+      "comment" : "null"
+      "superclass" : "Object"
+      "variables" : 
+      "abstract" : "true"
+  "functions" : 
+    "functions" : 
+      "getA" : 
+        "operator" : "false"
+        "parameters" : 
+          "testString" : 
+            "type" : "String"
+            "optional" : "true"
+            "default" : "default"
+          "testInt" : 
+            "type" : "int"
+            "optional" : "false"
+            "default" : "null"
+        "comment" : "null"
+        "rtype" : "A"
+        "static" : "false"
+      "main" : 
+        "operator" : "false"
+        "parameters" : 
+        "comment" : "null"
+        "rtype" : "dynamic"
+        "static" : "false"
+    "setters" : 
+      "variable1=" : 
+        "operator" : "false"
+        "parameters" : 
+          "abc" : 
+            "type" : "int"
+            "optional" : "false"
+            "default" : "null"
+        "comment" : "null"
+        "rtype" : "void"
+        "static" : "false"
+  "comment" : "This library is used solely for testing during development and is not intended to be run by the testing machines."
+  "variables" : 
+    "_variable1" : 
+      "final" : "false"
+      "comment" : "Doc comment for top-level variable."
+      "static" : "false"
+      "type" : "int"
+

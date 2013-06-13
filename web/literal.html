@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<element name="dartdoc-item" constructor="ItemElement" extends="article"  
+<element name="dartdoc-literal" constructor="LiteralElement" extends="div"  
     apply-author-styles>
   <template>
-    <h1 on-click="print(title)">{{title}}</h1> 
+    <p class="description">{{content}}</p>
   </template>
   <script type="application/dart">
     import 'package:web_ui/web_ui.dart';
@@ -10,14 +10,14 @@
     import 'app.dart' as app;
     
     /**
-     * An HTML representation of a Item. 
+     * An HTML representation of a Literal. 
      *
      * Used as a placeholder for an CategoryItem object. 
      */
-    class ItemElement extends WebComponent {
-      Item item;
+    class LiteralElement extends WebComponent {
+      Literal literal;
       
-      String get title => item.name;
+      String get content => literal.content;
     }
   </script>
 </element>
