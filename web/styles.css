@@ -42,56 +42,51 @@ nav {
   overflow: hidden;
   padding: 1%;
   margin: 0;
+  a {
+    float: left;
+    padding: 1%;
+    &:before {
+      content: ' / '; 
+    }   
+  }
 }
 
-.breadcrumbs a {
-  float: left;
-  padding: 1%;
-}
-
-.breadcrumbs a:before {
-  content: ' / ';
-}
-
-main h1 {
-  padding-left: 2%;
-}
-
-main .description {
-  font: italic .8rem; 
+main {
+  h1 {
+    padding-left: 2%;
+  }
+  .description {
+    font: italic .8rem;
+  }  
 }
 
 .description {
   padding: 0 2% 2% 4%;
 }
 
-.category summary {
-  padding: 2%;
-  font-size: 1.2rem;
-}
-
-.category article {
-  width: 100%;
-  padding: 2%;
-  background: #fdfdfd;
-  border-bottom: 1px solid #ddd;
-  -webkit-box-shadow: inset 0 0 15px rgba(0, 0, 0, .05);
-  -moz-box-shadow: inset 0 0 15px rgba(0, 0, 0, .05);
-  box-shadow: inset 0 0 15px rgba(0, 0, 0, .05);
-}
-
-.category article:FOCUS,
-.category article:ACTIVE,
-.category article:HOVER {
-  opacity: .7;
-  text-decoration: underline;
-}
-
-.category article h1 {
-  margin: 0;
-  font-size: 1rem;
-}
-
-.category .category {
-  padding-left: 3%;
+.category {
+  summary {
+    padding: 2%;
+    font-size: 1.2rem;
+  }
+  article {
+    width: 100%;
+    padding: 2%;
+    background: #fdfdfd;
+    border-bottom: 1px solid #ddd;
+    -webkit-box-shadow: inset 0 0 15px rgba(0, 0, 0, .05);
+    -moz-box-shadow: inset 0 0 15px rgba(0, 0, 0, .05);
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, .05);
+    &:FOCUS, &:ACTIVE, &:HOVER {
+      opacity: .7;
+      text-decoration: underline;
+    }
+    h1 {
+      margin: 0;
+      font-size: 1rem;
+    }        
+  }
+  .category {
+    padding-left: 3%;
+  }  
 }
