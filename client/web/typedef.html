@@ -2,7 +2,7 @@
 <link rel="import" href="parameters.html">
 <link rel="import" href="annotations.html">
 
-<element name="dartdoc-typedef" constructor="TypedefElement" extends="article"
+<element name="dartdoc-typedef" constructor="TypedefElement" extends="div"
     apply-author-styles>
   <template>
     <template if="item == null">
@@ -10,17 +10,12 @@
     </template>
     <template if="item != null">
       
-      <div class="page-header"><h1>{{item.name}} typedef</h1></div>
-      
-      <!-- Comment -->
-      <section class="description">{{addComment('dartdoc-typedef')}}</section>
-      
-      <!-- Signature -->
-      <div class="panel">  
+      <div class="panel-heading">
+        <a id="{{idName}}"></a>
         <dartdoc-annotation annotations="{{item.annotations}}">
         </dartdoc-annotation>
-          
-        <p class="panel-title">typedef
+        <!-- Signature -->
+        <p>typedef
           <a href="#{{item.type.location}}">
             {{item.type.simpleType}}
           </a>{{item.name}}
@@ -29,6 +24,24 @@
           </dartdoc-parameter>
         </p>
       </div>
+
+      <!-- Comment -->
+      <template if="app.viewer.isInherited || !hasInheritedComment">
+        <p class="description">
+          {{addComment('dartdoc-typedef', preview: !isExpanded)}}
+        </p>
+      </template>
+
+      <template instantiate="if !nothingToExpand">
+        <a on-click="toggleExpand()" class="btn-link">
+          <template if="isExpanded">
+            ...Show less
+          </template>
+          <template if="!isExpanded">
+            ...Show more
+          </template>
+        </a>
+      </template>
       
     </template>
   </template>
@@ -38,10 +51,12 @@
     import 'package:dartdoc_viewer/item.dart';
     import 'package:web_ui/web_ui.dart';
     
-    import 'app.dart';
+    import 'app.dart' as app;
     import 'member.dart';
     
     class TypedefElement extends MemberElement {
+      @observable bool isExpanded = false;
+      @observable bool nothingToExpand;
       
       // Required parameters.
       List<Parameter> get required => 
@@ -50,6 +65,23 @@
       // Optional parameters.
       List<Parameter> get optional => 
         item.parameters.where((parameter) => parameter.isOptional).toList();
+
+      inserted() {
+        super.inserted();
+        var index = item.comment.indexOf('</p>');
+        if (index == -1) {
+          isExpanded = true;
+        } else {
+          index = item.comment.indexOf('</p>', index + 1);
+          if (index == -1) isExpanded = true;
+          else isExpanded = false;
+        }
+        nothingToExpand = isExpanded;
+      }
+
+      void toggleExpand() {
+        isExpanded = !isExpanded;
+      }
     }
   </script>
 </element>

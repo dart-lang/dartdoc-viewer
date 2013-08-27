@@ -2,6 +2,7 @@
 <link rel="import" href="item.html">
 <link rel="import" href="variable.html">
 <link rel="import" href="method-panel.html">
+<link rel="import" href="typedef.html">
 
 <element name="dartdoc-category" constructor="CategoryElement" 
     extends="div" apply-author-styles>     
@@ -21,7 +22,8 @@
       <div class="accordion-inner">
         <ul class="nav nav-pills nav-stacked">
           <template iterate="item in category.content">
-            <template if="item is Item && item is! Variable && item is! Method">
+            <template if="item is Item && item is! Variable && 
+                item is! Method && item is! Typedef">
               <dartdoc-item class="panel" item="{{item}}"></dartdoc-item>
             </template>
             
@@ -38,6 +40,13 @@
                 </method-panel>
                 <dartdoc-item class="visible-sm panel" item="{{item}}">
                 </dartdoc-item>
+              </template>
+            </template>
+
+            <template if="item is Typedef">
+              <template if="!item.isInherited || app.viewer.isInherited">
+                <dartdoc-typedef item="{{item}}" class="panel">
+                </dartdoc-typedef>
               </template>
             </template>
           </template>

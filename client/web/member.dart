@@ -27,7 +27,7 @@ class MemberElement extends WebComponent {
     var comment = item.comment;
     if (preview && (item is Class || item is Library)) 
       comment = item.previewComment;
-    if (preview && (item is Method || item is Variable)) {
+    if (preview && (item is Method || item is Variable || item is Typedef)) {
       var index = item.comment.indexOf('</p>');
       // All comments when read in from the YAML is surrounded by a <span> tag.
       // This finds the first paragraph, and surrounds it with a span tag for
