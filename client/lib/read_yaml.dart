@@ -15,9 +15,8 @@ import 'dart:convert';
 /**
  * Retrieves a file at the given [path].
  */
-Future<String> retrieveFileContents(String path) {
-  return HttpRequest.getString(Uri.encodeFull(path));
-}
+Future<String> retrieveFileContents(String path) =>
+    HttpRequest.getString(Uri.encodeFull(path));
 
 /**
  * Creates a [Library] object from the [response] string of YAML.
@@ -25,6 +24,5 @@ Future<String> retrieveFileContents(String path) {
 Item loadData(String response) {
   var doc = isYaml ? loadYaml(response) :
       response == '' ? null : JSON.decode(response);
-  if (doc == null) return null;
-  return new Library(doc);
+  return doc == null ? null : new Library(doc);
 }

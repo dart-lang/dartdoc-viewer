@@ -36,24 +36,20 @@ nothing() => null;
 }
 
 /** Wraps a comment in span element to make it a single HTML Element. */
-String _wrapComment(String comment) {
-  if (comment == null) comment = '';
-  return '<div>$comment</div>';
-}
+String _wrapComment(String comment) =>
+    comment == null ? '<div></div>' : '<div>$comment</div>';
 
 /**
  * A [Container] that contains other [Container]s to be displayed.
  */
 @reflectable class Category extends Container {
-
   List<Container> content = [];
   Set<String> memberNames = new Set<String>();
   int inheritedCounter = 0;
   int memberCounter = 0;
 
-  Item memberNamed(String name, {orElse : nothing}) {
-    return content.firstWhere((x) => x.name == name, orElse: orElse);
-  }
+  Item memberNamed(String name, {orElse : nothing}) =>
+      content.firstWhere((x) => x.name == name, orElse: orElse);
 
   Category.forClasses(List<Map> classes, String name,
       {bool isAbstract: false}) : super(name) {
@@ -202,9 +198,7 @@ class Filter {
   }
 
   /// Loads this [Item]'s data and populates all fields.
-  Future load() {
-    return new Future.value(this);
-  }
+  Future load() => new Future.value(this);
 
   /// Adds the comment from [item] to [this].
   void addInheritedComment(Item item) {}
@@ -260,7 +254,6 @@ int _compareLibraryNames(String a, String b) {
  * An [Item] containing all of the [Library] and [Placeholder] objects.
  */
 @reflectable class Home extends Item {
-
   Item get home => this;
   Home owner;
 
@@ -291,23 +284,22 @@ int _compareLibraryNames(String a, String b) {
     var directLibraries = isTopLevelHome ? packages[''] : libraryList;
     for (Map library in directLibraries) {
       var libraryName = library['name'];
-      var newLibrary = new Library.forPlaceholder(library);
-      newLibrary.home = this;
+      var newLibrary = new Library.forPlaceholder(library)..home = this;
       this.libraries.add(newLibrary);
       pageIndex[newLibrary.qualifiedName] = newLibrary;
     };
-    packages.remove('');
-    packages.forEach((packageName, libraries) {
-      var main = libraries.firstWhere(
-          (each) => each['name'] == packageName,
-          orElse: () => libraries.first);
-      var package = new Home({
-        'libraries' : libraries,
-        'packageName' : packageName
+    packages
+        ..remove('')
+        ..forEach((packageName, libraries) {
+          var main = libraries.firstWhere(
+              (each) => each['name'] == packageName,
+              orElse: () => libraries.first);
+          var package = new Home({
+              'libraries' : libraries,
+              'packageName' : packageName
+          });
+          this.libraries.add(package..owner = this);
         });
-      package.owner = this;
-      this.libraries.add(package);
-    });
 
     _sort([this.libraries]);
     makeMainLibrarySpecial(yaml);
@@ -326,8 +318,7 @@ int _compareLibraryNames(String a, String b) {
     var mainLib = libraries.firstWhere((each) => each.name == name,
         orElse: () => libraries.isEmpty ? null : libraries.first);
     if (mainLib != null) {
-      libraries.remove(mainLib);
-      libraries.insert(0, mainLib);
+      libraries..remove(mainLib)..insert(0, mainLib);
       var libs = yaml['libraries'];
       var main = libs.firstWhere((each) => each['name'] == mainLib.name);
       var intro = main['packageIntro'];
@@ -348,8 +339,8 @@ int _compareLibraryNames(String a, String b) {
 @reflectable void buildHierarchy(Item page, Item previous) {
   if (page.path.isEmpty) {
     page.path
-      ..addAll(previous.path)
-      ..add(page);
+        ..addAll(previous.path)
+        ..add(page);
   }
   page.addToHierarchy();
 }
@@ -358,14 +349,12 @@ int _compareLibraryNames(String a, String b) {
  * An [Item] that is lazily loaded.
  */
 @reflectable abstract class LazyItem extends Item {
-
   bool isLoaded = false;
   String previewComment;
 
   LazyItem(String qualifiedName, String name, previewComment,
-      [String comment]) : super(name, qualifiedName, comment) {
-    this.previewComment = previewComment;
-  }
+      [String comment]) : previewComment = previewComment ,
+      super(name, qualifiedName, comment);
 
   /// Loads this [Item]'s data and populates all fields.
   Future load() {
@@ -388,7 +377,6 @@ int _compareLibraryNames(String a, String b) {
  * An [Item] that describes a single Dart library.
  */
 @reflectable class Library extends LazyItem {
-
   Category classes;
   Category errors;
   Category typedefs;
@@ -447,18 +435,15 @@ int _compareLibraryNames(String a, String b) {
   }
 
   String get decoratedName {
-    if (isDartLibrary) {
-      return name.replaceAll('-dom-', '-').replaceAll('-', ':');
-    } else {
-      return name.replaceAll('-', '.');
-    }
+    return isDartLibrary ?
+        name.replaceAll('-dom-', '-').replaceAll('-', ':') :
+        name.replaceAll('-', '.');
   }
 
   bool get isDartLibrary => name.startsWith("dart-");
 
   Item memberNamed(String name, {Function orElse : nothing}) {
-    if (name == null) return orElse();
-    if (!isLoaded) return orElse();
+    if (name == null || !isLoaded) return orElse();
     for (var category in
         [classes, functions, variables, operators, typedefs, errors]) {
       var member = category.memberNamed(name, orElse: nothing);
@@ -472,11 +457,9 @@ int _compareLibraryNames(String a, String b) {
  * An [Item] that describes a single Dart class.
  */
 @reflectable class Class extends LazyItem {
-
   Category functions;
   Category variables;
   Category constructs;
-  get constructors => constructs;
   Category operators;
   LinkableType superClass;
   bool isAbstract;
@@ -489,6 +472,7 @@ int _compareLibraryNames(String a, String b) {
   Category _staticVariables;
   Category _instanceFunctions;
   Category _staticFunctions;
+
   void flushCaches() {
     _instanceVariables = null;
     _staticVariables = null;
@@ -496,6 +480,7 @@ int _compareLibraryNames(String a, String b) {
     _staticFunctions = null;
   }
 
+  Category get constructors => constructs;
   Category get instanceVariables {
     if (_instanceVariables == null) {
       _instanceVariables = new Category.forInstanceMembers(variables.content,
@@ -634,11 +619,9 @@ int _compareLibraryNames(String a, String b) {
     var out = new StringBuffer();
     out.write(name);
     if (generics.isNotEmpty) {
-      out.write("<");
       // Use a non-breaking space character, not &nbsp; because this will
       // get escaped.
-      out.write(generics.join(",\u{00A0}"));
-      out.write(">");
+      out.writeAll(["<", generics.join(",\u{00A0}"), ">"]);
     }
     return out.toString();
   }
@@ -660,32 +643,28 @@ int _compareLibraryNames(String a, String b) {
  * A collection of [Annotation]s.
  */
 @reflectable class AnnotationGroup {
-
   List<String> supportedBrowsers = [];
   List<Annotation> annotations = [];
   String domName;
 
   Item memberNamed(String name, {Function orElse : nothing}) {
-    for (var annotation in annotations) {
-      if (annotation.qualifiedName == name) return annotation;
-    }
-    return orElse();
+    annotations.firstWhere((a) => a.qualifiedName == name, orElse: orElse);
   }
 
   AnnotationGroup(List annotes) {
     var set = new Set();
     if (annotes != null) {
       annotes.forEach((annotation) {
-        if (annotation['name'].split(".").last == 'SupportedBrowser') {
+        if (annotation['name'].endsWith('.SupportedBrowser')) {
           supportedBrowsers.add(annotation['parameters'].toList().join(' '));
-        } else if (annotation['name'].split(".").last == 'DomName') {
+        } else if (annotation['name'].endsWith('.DomName')) {
           domName = annotation['parameters'].first;
         } else {
           set.add(new Annotation(annotation));
         }
       });
-    annotations = set.toList();
-    annotations.sort((a, b) => a.shortName.compareTo(b.shortName));
+    annotations = set.toList()
+        ..sort((a, b) => a.shortName.compareTo(b.shortName));
     }
   }
 }
@@ -694,7 +673,6 @@ int _compareLibraryNames(String a, String b) {
  * A single annotation to an [Item].
  */
 @reflectable class Annotation {
-
   String qualifiedName;
   LinkableType link;
   List<String> parameters;
@@ -707,8 +685,7 @@ int _compareLibraryNames(String a, String b) {
 
   /// Hash by XORing together our name and parameters.
   get hashCode => parameters.fold(
-      qualifiedName.hashCode,
-      (a, param) => a ^ param.hashCode);
+      qualifiedName.hashCode, (a, param) => a ^ param.hashCode);
 
   operator ==(other) => qualifiedName == other.qualifiedName &&
       const ListEquality().equals(parameters, other.parameters);
@@ -722,7 +699,6 @@ int _compareLibraryNames(String a, String b) {
  * An [Item] that describes a Dart member with parameters.
  */
 @reflectable class Parameterized extends Item {
-
   List<Parameter> parameters;
 
   Parameterized(String name, String qualifiedName, [String comment])
@@ -730,7 +706,7 @@ int _compareLibraryNames(String a, String b) {
 
   /// Creates [Parameter] objects for each parameter to this method.
   List<Parameter> getParameters(Map parameters) {
-    var values = [];
+    var values = <Parameter>[];
     if (parameters != null) {
       parameters.forEach((name, data) {
         values.add(new Parameter(name, data, this));
@@ -744,7 +720,6 @@ int _compareLibraryNames(String a, String b) {
  * An [Item] that describes a single Dart typedef.
  */
 @reflectable class Typedef extends Parameterized {
-
   LinkableType type;
   AnnotationGroup annotations;
 
@@ -760,7 +735,6 @@ int _compareLibraryNames(String a, String b) {
  * An [Item] that describes a single Dart method.
  */
 @reflectable class Method extends Parameterized {
-
   bool isStatic;
   bool isAbstract;
   bool isConstant;
@@ -778,11 +752,11 @@ int _compareLibraryNames(String a, String b) {
       String commentFrom: '', this.owner})
         : super(yaml['name'], yaml['qualifiedName'],
             _wrapComment(yaml['comment'])) {
-    this.isStatic = _boolFor('static', yaml);
-    this.isAbstract = _boolFor('abstract', yaml);
-    this.isConstant = _boolFor('constant', yaml);
-    this.commentFrom = commentFrom == '' ? yaml['commentFrom'] : commentFrom;
-    this.type = new NestedType(yaml['return'].first);
+    this..isStatic = _boolFor('static', yaml)
+        ..isAbstract = _boolFor('abstract', yaml)
+        ..isConstant = _boolFor('constant', yaml)
+        ..commentFrom = commentFrom == '' ? yaml['commentFrom'] : commentFrom
+        ..type = new NestedType(yaml['return'].first);
     parameters = getParameters(yaml['parameters']);
     annotations = new AnnotationGroup(yaml['annotations']);
   }
@@ -847,9 +821,7 @@ int _compareLibraryNames(String a, String b) {
   /// location.
   DocsLocation get localLocation {
     if (!isInherited || owner == null) return location;
-    var local = owner.location;
-    local.subMemberName = name;
-    return local;
+    return owner.location..subMemberName = name;
   }
 
   // Helper to determine if this method is actually an unnamed constructor.
@@ -862,7 +834,6 @@ int _compareLibraryNames(String a, String b) {
  * A single parameter to a [Method].
  */
 @reflectable class Parameter {
-
   String name;
   bool isOptional;
   bool isNamed;
@@ -873,11 +844,11 @@ int _compareLibraryNames(String a, String b) {
   Item owner;
 
   Parameter(this.name, Map yaml, [this.owner]) {
-    this.isOptional = _boolFor('optional', yaml);
-    this.isNamed = _boolFor('named', yaml);
-    this.hasDefault = _boolFor('default', yaml);
-    this.type = new NestedType(yaml['type'].first);
-    this.defaultValue = yaml['value'];
+    this..isOptional = _boolFor('optional', yaml)
+        ..isNamed = _boolFor('named', yaml)
+        ..hasDefault = _boolFor('default', yaml)
+        ..type = new NestedType(yaml['type'].first)
+        ..defaultValue = yaml['value'];
     annotations = new AnnotationGroup(yaml['annotations']);
   }
 
@@ -885,11 +856,7 @@ int _compareLibraryNames(String a, String b) {
 
   String get decoration {
     if (hasDefault) {
-      if (isNamed) {
-        return ': $defaultValue';
-      } else {
-        return '=$defaultValue';
-      }
+      return isNamed ? ': $defaultValue' : '=$defaultValue';
     }
     return '';
   }
@@ -904,9 +871,8 @@ int _compareLibraryNames(String a, String b) {
     if (owner is Method && (owner as Method).isUnnamedConstructor) {
       parameterLoc = owner.location;
     }
-    parameterLoc.anchor = parameterLoc.toHash(
+    return parameterLoc..anchor = parameterLoc.toHash(
         "${owner.hashDecoratedName}_$name");
-    return parameterLoc;
   }
 
   String get anchorHref => anchorHrefLocation.withAnchor;
@@ -918,7 +884,6 @@ int _compareLibraryNames(String a, String b) {
  * A [Container] that describes a single Dart variable.
  */
 @reflectable class Variable extends Item {
-
   bool isFinal;
   bool isStatic;
   bool isAbstract;
@@ -932,13 +897,10 @@ int _compareLibraryNames(String a, String b) {
   AnnotationGroup annotations;
   Class owner;
 
-  Variable(Map yaml, {bool isGetter: false, bool isSetter: false,
-      String inheritedFrom: '', String commentFrom: '', this.owner})
+  Variable(Map yaml, {this.isGetter: false, this.isSetter: false,
+      this.inheritedFrom: '', String commentFrom: '', this.owner})
       : super(yaml['name'], yaml['qualifiedName'],
           _wrapComment(yaml['comment'])) {
-    this.isGetter = isGetter;
-    this.isSetter = isSetter;
-    this.inheritedFrom = inheritedFrom;
     this.commentFrom = commentFrom == '' ? yaml['commentFrom'] : commentFrom;
     isFinal = _boolFor('final', yaml);
     isStatic = _boolFor('static', yaml);
@@ -981,9 +943,7 @@ int _compareLibraryNames(String a, String b) {
   /// location.
   DocsLocation get localLocation {
     if (!isInherited || owner == null) return location;
-    var local = owner.location;
-    local.subMemberName = name;
-    return local;
+    return owner.location..subMemberName = name;
   }
 }
 
@@ -1012,7 +972,6 @@ int _compareLibraryNames(String a, String b) {
  * A Dart type that should link to other [Item]s.
  */
 @reflectable class LinkableType {
-
   /// The resolved qualified name of the type this [LinkableType] represents.
   DocsLocation loc;
 

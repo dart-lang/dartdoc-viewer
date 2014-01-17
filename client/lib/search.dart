@@ -21,9 +21,17 @@ import 'package:dartdoc_viewer/location.dart';
 final SearchIndex searchIndex = new SearchIndex();
 
 @reflectable class SearchResult implements Comparable {
-
   /** Qualified name of this search result references. */
-  String element;
+  final String element;
+
+  /** This element's member type. */
+  final String type;
+
+  /** Score of the search result match. Higher is better. */
+  final int score;
+
+  /** Its numerical position from the top of the list of results. */
+  int position;
 
   static const typesThatLinkWithinAParentPage = const ['method', 'operator',
     'getter', 'setter', 'variable', 'constructor', 'property' ];
@@ -39,15 +47,6 @@ final SearchIndex searchIndex = new SearchIndex();
     newLocation.anchor = newLocation.toHash(sub);
     return newLocation.withAnchor;
   }
-
-  /** This element's member type. */
-  String type;
-
-  /** Score of the search result match. Higher is better. */
-  int score;
-
-  /** Its numerical position from the top of the list of results. */
-  int position;
 
   /**
    * Order results with higher scores before lower scores.
@@ -106,8 +105,8 @@ class Hit {
 const int MAX_RESULTS_TO_CONSIDER = 1000;
 
 List<String> _splitQueryTerms(String query) {
-  var queryList = query.trim().toLowerCase().split(' ');
-  queryList = queryList.map((x) => x.replaceAll(":", '-')).toList();
+  var queryList = query.trim().toLowerCase().split(' ')
+      .map((x) => x.replaceAll(":", '-')).toList();
   // If someone types a dot we don't know if they meant e.g. polymer.builder
   // library or polymer.CustomTag, or polymer.builder.CommandLineOptions.
   // So add a query term with those replaced with hyphens, but also split
@@ -116,8 +115,9 @@ List<String> _splitQueryTerms(String query) {
   var splitDots = queryList.map((x) => x.split(".")).toList();
   for (List split in splitDots) {
     if (split.length > 1) {
-      queryList.addAll(split.where((x) => x.length > 2));
-      queryList.add(split.join("-"));
+      queryList
+          ..addAll(split.where((x) => x.length > 2))
+          ..add(split.join("-"));
     }
   }
   return queryList;
@@ -136,9 +136,8 @@ List<SearchResult> lookupSearchResults(SearchIndex index, String query,
   if (query == '') return [];
 
   var stopwatch = new Stopwatch()..start();
-
   var scoredResults = <SearchResult>[];
-  var resultSet = new List<Hit>();
+  var resultSet = <Hit>[];
   var queryList = _splitQueryTerms(query);
 
   for (var key in index.map.keys) {
