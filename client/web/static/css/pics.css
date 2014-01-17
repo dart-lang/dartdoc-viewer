@@ -261,8 +261,7 @@ TODO(janicejl): Currently uses fixed widths, change to use flex-box in future.
 }
 
 .header-logo {
-  background-image: url('../dart-logo.png');
-  background-repeat: no-repeat;
+  background: url('../dart-logo.png') no-repeat;
   width: 116px !important;
   height: 31px !important;
   float: left;
