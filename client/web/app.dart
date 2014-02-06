@@ -418,7 +418,7 @@ class Viewer extends Observable {
 
   /// Make the indicator that we're loading data visible.
   showLoadIndicator() {
-    if(loadIndicator.style.display != '') {
+    if (loadIndicator.style.display != '') {
       loadIndicator.style.display = '';
       loadIndicator.children.first.style
           ..transition = 'all 0ms linear'
