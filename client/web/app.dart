@@ -402,6 +402,9 @@ class Viewer extends Observable {
 
 
   Element _loadIndicator;
+  Timer _loadIndicatorUpdateTimer;
+  static const _loadIndicatorSpeed = 150;
+  double _progess = 1.0;
 
   /// When we have to fetch the JSON for an Item, display a spinning
   /// indicator to show the user that something is happening.
@@ -414,10 +417,56 @@ class Viewer extends Observable {
   }
 
   /// Make the indicator that we're loading data visible.
-  showLoadIndicator() => loadIndicator.style.display = '';
+  showLoadIndicator() {
+    if(loadIndicator.style.display != '') {
+      loadIndicator.style.display = '';
+      loadIndicator.children.first.style
+          ..transition = 'all 0ms linear'
+          ..transform = 'translate3d(-100%,0,0)';
+
+      _progess = 1.0;
+      _updateLoadIndicator();
+    }
+  }
 
   /// Hide the indicator that we're loading data.
-  hideLoadIndicator() => loadIndicator.style.display = 'none';
+  hideLoadIndicator() {
+    if (_loadIndicatorUpdateTimer != null) {
+      _loadIndicatorUpdateTimer.cancel();
+      _loadIndicatorUpdateTimer = null;
+    }
+
+    if (_progess >= 1.0 / 1.168) {
+      // Very short time, don't show it a fill width, looks "faster".
+      loadIndicator.style.display = 'none';
+    } else {
+      // Before hiding the load indicator, show it at least for a moment at 
+      // full width.
+      loadIndicator.children.first.style
+          ..transition = 'all ${_loadIndicatorSpeed}ms linear'
+          ..transform = 'translate3d(0%,0,0)';
+
+      _loadIndicatorUpdateTimer = new Timer(const Duration(milliseconds: 
+        _loadIndicatorSpeed), () => loadIndicator.style.display = 'none');
+    }
+  }
+
+  _updateLoadIndicator() {
+    if (loadIndicator.style.display == '') {
+      loadIndicator.children.first.style
+          ..transition = 'all ${_loadIndicatorSpeed}ms linear'
+          ..transform = 'translate3d(${-100 * _progess}%,0,0)';
+      _progess /= 1.168;
+
+      if (_loadIndicatorUpdateTimer != null) {
+        _loadIndicatorUpdateTimer.cancel();
+        _loadIndicatorUpdateTimer = null;
+      }
+
+      _loadIndicatorUpdateTimer = new Timer(const Duration(milliseconds: 
+        _loadIndicatorSpeed), _updateLoadIndicator);
+    }
+  }
 }
 
 /// The path of this app on startup.

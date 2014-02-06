@@ -10,8 +10,10 @@
 <polymer-element name="dartdoc-main">
   <template>
     <div class="navbar navbar-fixed-top">
-      <img src="static/loading.gif" id="loading-indicator" 
-          style="display:none" />
+      <div id="loading-indicator" 
+          style="display:none">
+          <div class="bar" role="bar"><div class="blured"></div></div>
+      </div>
       <div class="navbar-inner">
         <button type="button" class="navbar-toggle" id="nav-collapse-button"
           on-click="{{navHideShow}}">
