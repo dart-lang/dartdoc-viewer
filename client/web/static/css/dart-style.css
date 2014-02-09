@@ -53,16 +53,13 @@ h4 {
 }
 
 h5 {
-    font: 400 12px/17px 'Montserrat', sans-serif;
+    font: 400 15px/17px 'Montserrat', sans-serif;
     margin-top: 90px;
-    font-weight: 400;
-    font-size: 15px;
     color: #484848;
 }
 
 h6 {
-  	font: 400 12px/17px 'Montserrat', sans-serif;
-  	font-size: 15px;
+  	font: 400 15px/17px 'Montserrat', sans-serif;
   	color: #0084c5;
   	margin-bottom: 35px;
 }
@@ -179,9 +176,9 @@ i.icon-close-x {
 .navbar {
     min-height: 65px;
     background: #fff;
-    -webkit-box-shadow: 0px 2px 2px rgba(50, 50, 50, 0.15);
-       -moz-box-shadow: 0px 2px 2px rgba(50, 50, 50, 0.15);
-            box-shadow: 0px 2px 2px rgba(50, 50, 50, 0.15);
+    -webkit-box-shadow: 0 2px 2px rgba(50, 50, 50, 0.15);
+       -moz-box-shadow: 0 2px 2px rgba(50, 50, 50, 0.15);
+            box-shadow: 0 2px 2px rgba(50, 50, 50, 0.15);
     -webkit-transform: translateZ(0);
 }
 
@@ -198,11 +195,9 @@ i.icon-close-x {
 }
 
 .navbar-nav > li > a {
-    font-family: 'Montserrat', sans-serif;
+    font: 12px/18px 'Montserrat', sans-serif;
     text-decoration: none;
     color: #464646;
-    font-size: 12px;
-    line-height: 18px;
     padding-top: 30px;
 }
 
@@ -243,7 +238,7 @@ i.icon-close-x {
     .navbar-brand.btn-link {
         width: auto;
         max-width: none;
-        margin-top: 0px !important;
+        margin-top: 0 !important;
         padding-top: 22px !important;
         text-align: left;
     }
@@ -334,8 +329,7 @@ i.icon-close-x {
 
 /* ***** Carousel ***** */
 .carousel {
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin: 20px 0;
 }
 
 .dart-carousel .carousel-indicators {
@@ -363,7 +357,6 @@ i.icon-close-x {
     height: auto;
     text-indent: 0;
     border: none;
-    border-radius: 0;
     margin-right: 40px;
     margin-bottom: 10px;
     padding-bottom: 10px;
@@ -431,8 +424,7 @@ i.icon-close-x {
 .lang-dart {
     max-width: 800px;
     text-align: left;
-    margin-right: auto;
-    margin-left: auto;
+    margin: 0 auto;
     /*background-image: url(../img/);*/
 
     -webkit-box-shadow: 0 5px 18px -7px rgba(0, 0, 0, 0.2);
@@ -488,7 +480,7 @@ i.icon-close-x {
     display: block;
     width: 8px;
     height: 8px;
-    margin: 0 0 0 auto;
+    margin: 0 0 auto;
 }
 
 .popover_nav {
@@ -587,7 +579,6 @@ i.icon-close-x {
     color: #fff;
 }
 
-
 .dart-container > section {
     margin-top: 65px;
     margin-bottom: 50px;
@@ -657,7 +648,7 @@ b {
 }
 
 #itemList .description.panel p {
-    padding-left:0px !important;
+    padding-left:0 !important;
 }
 
 /* A lot of the HTML comments have <h2>Other Resources</h2> which
@@ -682,7 +673,7 @@ b {
 
 @media (max-width: 768px) {
     #itemList .panel li {
-        margin-left:0px;
+        margin-left:0;
     }
 }
 
@@ -703,21 +694,19 @@ b {
 
 
 .panel-heading {
-    padding: 0px 10px;
+    padding: 0 10px;
     margin: -15px -8px 15px !important;
 }
 
 
 .panel-heading p {
     font-size:15px !important;
-    padding-left:0px !important;
+    padding-left:0 !important;
 }
 
 #nameGoesHere a {
     font-size:15px !important;
 }
-
-
 
 /* ***** Buttons ***** */
 
@@ -731,10 +720,9 @@ b {
     -moz-transition: background ease-out 500ms;
     -o-transition: background ease-out 500ms;
     transition: background ease-out 500ms;
-    -moz-box-shadow:    0 1px 0px 1px #d9d9d9;
-    -webkit-box-shadow: 0 1px 0px 1px #d9d9d9;
-    box-shadow:         0 1px 0px 1px #d9d9d9;
-    font-weight:300;
+    -moz-box-shadow:    0 1px 0 1px #d9d9d9;
+    -webkit-box-shadow: 0 1px 0 1px #d9d9d9;
+    box-shadow:         0 1px 0 1px #d9d9d9;
 }
 
 .btn-primary {
@@ -764,16 +752,14 @@ b {
 }
 
 .bs-sidenav {
-    margin-top: 30px;
-    margin-bottom: 30px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    margin: 30px 0;
+    padding: 10px 0;
     background-color: #f6f6f6;
     border-radius: 5px;
 }
 
 .affix {
-position: fixed;
+    position: fixed;
 }
 
 code {
@@ -784,7 +770,6 @@ code {
     max-width: 650px;
     font-size: 100% !important;
 }
-
 
 #search {
     width: 300px !important;
@@ -828,7 +813,7 @@ dartdoc-annotation {
 
 /* Override the normal bootstrap which forces this to be
    invisible at this resolution */
-@media screen and (min-width: 768 px) {
+@media screen and (min-width: 768px) {
     .navbar-toggle {
         display: block;
     }

@@ -246,8 +246,7 @@ background-image: url('../method_private.png');
 }
 
 .header-logo {
-  background-image: url('../dart-logo.png');
-  background-repeat: no-repeat;
+  background: url('../dart-logo.png') no-repeat;
   width: 116px !important;
   height: 31px !important;
   float: left;
