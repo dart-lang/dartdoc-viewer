@@ -925,7 +925,7 @@ int _compareLibraryNames(String a, String b) {
 /**
  * A [Container] that describes a single Dart variable.
  */
-@reflectable class Variable extends Item {
+@reflectable class Variable extends Parameterized {
 
   bool isFinal;
   bool isStatic;
@@ -988,10 +988,8 @@ int _compareLibraryNames(String a, String b) {
     return local;
   }
 
-  /// Setters come out as variables, and can have parameter names, but
-  /// we ignore them in comments right now.
-  // TODO(alanknight): Handle setter parameter references properly.
-  Parameter parameterNamed(String name) => null;
+  List<Parameter> get parameters => setterParameter == null ?
+      const [] : [setterParameter];
 
   /// Return the first item in our chain of parents (including ourselves) which
   /// can serve as a page. For most things that's this item itself, but

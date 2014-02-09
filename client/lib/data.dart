@@ -10,7 +10,7 @@ library data;
 import 'package:dartdoc_viewer/item.dart';
 
 // Pages generated from the YAML file. Keys are the title of the pages.
-Map<String, Item> pageIndex = {};
+final Map<String, Item> pageIndex = {};
 
 // Determines if the input files are in YAML format or JSON format.
 bool isYaml = false;

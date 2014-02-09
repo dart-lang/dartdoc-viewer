@@ -6,7 +6,7 @@ library web.page;
 
 import 'package:polymer/polymer.dart';
 import 'package:dartdoc_viewer/item.dart';
-import 'member.dart';
+import 'package:dartdoc_viewer/member.dart';
 
 /** An HTML representation of a page */
 @CustomTag("dartdoc-page")

@@ -7,9 +7,9 @@ library web.class_;
 import 'dart:html';
 import 'package:dartdoc_viewer/item.dart';
 import 'package:polymer/polymer.dart';
-import 'app.dart';
-import 'lazy_load.dart';
-import 'member.dart';
+import 'package:dartdoc_viewer/app.dart';
+import 'package:dartdoc_viewer/lazy_load.dart';
+import 'package:dartdoc_viewer/member.dart';
 
 
 @CustomTag("dartdoc-class")

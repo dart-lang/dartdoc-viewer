@@ -23,7 +23,7 @@ final SearchIndex searchIndex = new SearchIndex();
 @reflectable class SearchResult implements Comparable {
 
   /** Qualified name of this search result references. */
-  String element;
+  final String element;
 
   static const typesThatLinkWithinAParentPage = const ['method', 'operator',
     'getter', 'setter', 'variable', 'constructor', 'property' ];
@@ -94,11 +94,11 @@ class Hit {
     'constructor' : 4
   }[type];
 
-  toString() => "Hit($name)";
+  String toString() => "Hit($name)";
 
   /// Calculate a score boost proportional to [increase], the [weight] given
   /// to our [type] of object.
-  score(num increase) => increase ~/ weight;
+  int score(num increase) => increase ~/ weight;
 }
 
 /// The maximum number of search results we will examine. Saves time on
@@ -238,7 +238,9 @@ List<SearchResult> lookupSearchResults(SearchIndex index, String query,
 
 class SearchIndex {
   Map<String, String> _map = {};
+
   Map<String, String> get map => _map;
+
   set map(Map<String, String> value) {
     if (_onLoad == null) {
       throw new StateError('cannot initialize SearchIndex twice.');

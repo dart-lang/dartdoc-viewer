@@ -7,7 +7,7 @@ library web.library_panel;
 import 'dart:html';
 import 'package:dartdoc_viewer/item.dart';
 import 'package:polymer/polymer.dart';
-import 'member.dart';
+import 'package:dartdoc_viewer/member.dart';
 
 /// An element in a page's minimap displayed on the right of the page.
 @CustomTag("dartdoc-library-panel")

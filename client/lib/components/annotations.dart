@@ -6,7 +6,7 @@ library web.annotations;
 
 import 'package:dartdoc_viewer/item.dart';
 import 'package:polymer/polymer.dart';
-import 'member.dart';
+import 'package:dartdoc_viewer/member.dart';
 
 // TODO(jmesserly): just extend HtmlElement?
 @CustomTag('dartdoc-annotation')

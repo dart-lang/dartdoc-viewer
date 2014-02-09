@@ -6,8 +6,8 @@ library web.library;
 
 import 'package:dartdoc_viewer/item.dart';
 import 'package:polymer/polymer.dart';
-import 'lazy_load.dart';
-import 'member.dart';
+import 'package:dartdoc_viewer/lazy_load.dart';
+import 'package:dartdoc_viewer/member.dart';
 
 /**
  * Implementation of the main view for a Dart library.

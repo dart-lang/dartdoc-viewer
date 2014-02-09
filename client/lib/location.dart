@@ -5,6 +5,7 @@
 library location;
 
 import 'package:observe/observe.dart';
+import 'item.dart';
 
 // These regular expressions are not strictly accurate for picking Dart
 // identifiers out of arbitrary text, e.g. identifiers must start with an
@@ -14,12 +15,15 @@ import 'package:observe/observe.dart';
 
 /// A package in one of our URIs is an identifer and ends with a slash
 final packageMatch = new RegExp(r'(\w+)/');
+
 /// A library in one of our URIs is an identifier but may contain either
 /// ':' or '-' in place of the '.' that is legal in a Dart library name.
 final libraryMatch = new RegExp(r'([\w\-\:]+)');
+
 /// A member or sub-member in one of our URI's starts with a '.' and is
 /// an identifier.
 final memberMatch = new RegExp(r'\.(\w+)');
+
 /// A sub-member can be a normal identifier but can also be an operator.
 /// Constructors always contain a "-" and are of the form
 /// "className-constructorName" (if constructorName is empty, it will just be
@@ -45,12 +49,12 @@ const CONSTRUCTOR_SEPARATOR = "-";
 const AJAX_LOCATION_PREFIX = "#!";
 const BASIC_LOCATION_PREFIX = "#";
 
-// Prefix the string with the separator we are using between the main
-// URL and the location.
-locationPrefixed(String s) => "$BASIC_LOCATION_PREFIX$s";
+/// Prefix the string with the separator we are using between the main
+/// URL and the location.
+String locationPrefixed(String s) => "$BASIC_LOCATION_PREFIX$s";
 
-// Remove the anchor prefix from [s] if it's present.
-locationDeprefixed(String s) {
+/// Remove the anchor prefix from [s] if it's present.
+String locationDeprefixed(String s) {
   if (s.startsWith(AJAX_LOCATION_PREFIX)) {
     return s.substring(AJAX_LOCATION_PREFIX.length, s.length);
   } else if (s.startsWith(BASIC_LOCATION_PREFIX)) {
@@ -60,8 +64,9 @@ locationDeprefixed(String s) {
   }
 }
 
-// This represents a component described by a URI and can give us
-// the URI given the component or vice versa.
+/// This represents a component described by a URI and can give us
+/// the URI given the component or vice versa.
+// TODO(kevmoo): make these fields final
 class DocsLocation {
   String packageName;
   String libraryName;
@@ -159,16 +164,20 @@ class DocsLocation {
       : libraryName == null
           ? packageName
           : '$packageName/';
+
   /// The name of the library. This never has leading or trailing separators,
   /// so it's the same as [libraryName].
   @reflectable  get libraryPlus => libraryName == null ? '' :  libraryName;
+
   /// The name of the library member, with a leading period if the [memberName]
   /// is non-empty.
   @reflectable get memberPlus => memberName == null ? '' : '.$memberName';
+
   /// The name of the member's sub-member (e.g. the field of a class),
   /// with a leading period if the [subMemberName] is non-empty.
   @reflectable get subMemberPlus =>
       subMemberName == null ? '' : '.$subMemberName';
+
   /// The trailing anchor e.g. @id_hashCode, including the leading @.
   @reflectable get anchorPlus => anchor == null ? '' : '@$anchor';
 
@@ -198,10 +207,10 @@ class DocsLocation {
   /// but we can't see those types from here. The [includeAllItems] parameter
   /// determines if we return a fixed-length list with all items included,
   /// which may be null, or if we just include the items with values.
-  @reflectable List items(root, {bool includeAllItems: false}) {
+  @reflectable List<Item> items(Item root, {bool includeAllItems: false}) {
     // TODO(alanknight): Re-arrange the structure so that we can see
     // those types without needing to import html as well.
-    var items = [];
+    var items = <Item>[];
     var package, library, member, subMember, anchorItem;
     package = packageName == null
         ? null
@@ -260,7 +269,7 @@ class DocsLocation {
   /// e.g. if we had dart-core.String.substring.startIndex it
   /// would return the substring [Method], since the method
   /// parameter doesn't have an [Item]. The [root] parameter is a Home.
-  item(root) {
+  Item item(Item root) {
     var myItems = items(root);
     if (myItems.isEmpty) return null;
     return myItems.last;
@@ -270,7 +279,7 @@ class DocsLocation {
   /// As compared to [item], which will just return the last found
   /// [Item], this will return null if there's not a match for the
   /// last item.
-  exactItem(root) {
+  Item exactItem(Item root) {
     var myItems = items(root, includeAllItems: true);
     if (anchor != null) return myItems[4];
     if (subMemberName != null) return myItems[3];

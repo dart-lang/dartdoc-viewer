@@ -8,11 +8,12 @@
     <template if="{{item.isStatic}}">static</template>
     <template if="{{item.isConstant}}">const</template>
     <template if="{{item.isSetter}}">
-      set&nbsp;
-      <b><a id="{{idName}}" href="{{item.prefixedAnchorHref}}">{{name}}</a></b>(
-      <dartdoc-annotation annotations="{{item.setterParameter.annotations}}">
-      </dartdoc-annotation>
-      <dartdoc-type type="{{item.setterParameter.type}}"></dartdoc-type>
+      set
+      <b><a id="{{idName}}" href="{{item.prefixedAnchorHref}}"
+          >{{name}}</a></b>(<dartdoc-annotation 
+          annotations="{{item.setterParameter.annotations}}">
+      </dartdoc-annotation><dartdoc-type 
+          type="{{item.setterParameter.type}}"></dartdoc-type>
       {{item.setterParameter.decoratedName}})
     </template>
     <template if="{{isNotSetter}}">

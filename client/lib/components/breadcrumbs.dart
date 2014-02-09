@@ -6,7 +6,8 @@ library web.breadcrumbs;
 
 import 'package:dartdoc_viewer/item.dart';
 import 'package:polymer/polymer.dart';
-import 'app.dart';
+import 'package:dartdoc_viewer/app.dart';
+import 'package:dartdoc_viewer/shared.dart';
 
 @CustomTag('dartdoc-breadcrumbs')
 class Breadcrumbs extends PolymerElement {

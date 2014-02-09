@@ -8,8 +8,8 @@ import 'dart:html';
 import 'package:dartdoc_viewer/item.dart';
 import 'package:dartdoc_viewer/read_yaml.dart';
 import 'package:polymer/polymer.dart';
-import 'app.dart';
-import 'member.dart';
+import 'package:dartdoc_viewer/app.dart';
+import 'package:dartdoc_viewer/member.dart';
 
 // TODO(alanknight): Clean up the dart-style CSS file's formatting once
 // it's stable.

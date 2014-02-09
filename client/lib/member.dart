@@ -9,7 +9,8 @@ import 'dart:html';
 import 'package:dartdoc_viewer/item.dart';
 import 'package:polymer/polymer.dart';
 import 'app.dart' as app;
-import 'app.dart' show Viewer, defaultSyntax;
+import 'viewer.dart';
+import 'shared.dart';
 import 'package:dartdoc_viewer/location.dart';
 
 class SameProtocolUriPolicy implements UriPolicy {

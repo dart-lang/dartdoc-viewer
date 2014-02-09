@@ -7,7 +7,8 @@ library web.minimap_element;
 import 'package:dartdoc_viewer/item.dart';
 import 'package:polymer/polymer.dart';
 import 'package:polymer/src/build/utils.dart' show toCamelCase;
-import 'app.dart' show viewer, defaultSyntax;
+import 'package:dartdoc_viewer/app.dart' show viewer, defaultSyntax;
+import 'package:dartdoc_viewer/shared.dart';
 
 /// An element in a page's minimap displayed on the right of the page.
 @CustomTag("dartdoc-minimap")

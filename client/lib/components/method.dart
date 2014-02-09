@@ -6,7 +6,7 @@ library web.method;
 
 import 'package:polymer/polymer.dart';
 
-import 'member.dart';
+import 'package:dartdoc_viewer/member.dart';
 import 'package:dartdoc_viewer/item.dart';
 
 

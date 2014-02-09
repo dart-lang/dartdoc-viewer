@@ -6,8 +6,8 @@ library web.category;
 
 import 'package:polymer/polymer.dart';
 import 'package:dartdoc_viewer/item.dart';
-import 'app.dart';
-import 'member.dart';
+import 'package:dartdoc_viewer/app.dart';
+import 'package:dartdoc_viewer/member.dart';
 import 'dart:html';
 
 /**

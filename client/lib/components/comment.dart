@@ -10,8 +10,8 @@ import 'package:dartdoc_viewer/item.dart';
 import 'package:dartdoc_viewer/location.dart';
 import 'package:dartdoc_viewer/search.dart' show searchIndex;
 import 'package:polymer/polymer.dart';
-import 'app.dart' show viewer;
-import 'member.dart';
+import 'package:dartdoc_viewer/app.dart' show viewer;
+import 'package:dartdoc_viewer/member.dart';
 
 // TODO(jmesserly): extend section once this bug is fixed?
 // https://codereview.chromium.org/90113002/

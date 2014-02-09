@@ -50,10 +50,14 @@ class Result extends AnchorElement with Polymer, Observable {
       if (lib == null) return '';
       return lib.decoratedName;
     } else if (membertype == 'constructor') {
-      // Non-named constructors have an empty string for the last element
-      // of the qualified name, so we display the class name instead.
-      if (name.last == '') return name[name.length - 2];
-      return '${name[name.length - 2]}.${name.last}';
+      // Constructor names have the class name followed by a hyphen followed
+      // by the constructor name. Unnamed constructors have nothing after the
+      // hyphen. We want to display just the constructor name, or nothing.
+      var className = name[name.length - 2];
+      var constructorNameWithClass = name.last;
+      var constructorName = constructorNameWithClass.split("-").last;
+      return constructorName.isEmpty ?
+          className : "$className.$constructorName";
     }
     return name.last;
   }

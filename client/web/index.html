@@ -6,15 +6,15 @@
   <link rel="stylesheet" href="static/css/dart-style.css">
   <link rel="stylesheet" href="static/css/pics.css">
   <link rel="stylesheet" href="static/css/prettify.css">
-  <link rel="import" href="category.html">
-  <link rel="import" href="item.html">
-  <link rel="import" href="minimap-element.html">
-  <link rel="import" href="page.html">
-  <link rel="import" href="search.html">
-  <link rel="import" href="minimap-library.html">
-  <link rel="import" href="library-panel.html">
-  <link rel="import" href="minimap-class.html">
-  <link rel="import" href="main.html">
+  <link rel="import" href="packages/dartdoc_viewer/components/category.html">
+  <link rel="import" href="packages/dartdoc_viewer/components/item.html">
+  <link rel="import" href="packages/dartdoc_viewer/components/minimap-element.html">
+  <link rel="import" href="packages/dartdoc_viewer/components/page.html">
+  <link rel="import" href="packages/dartdoc_viewer/components/search.html">
+  <link rel="import" href="packages/dartdoc_viewer/components/minimap-library.html">
+  <link rel="import" href="packages/dartdoc_viewer/components/library-panel.html">
+  <link rel="import" href="packages/dartdoc_viewer/components/minimap-class.html">
+  <link rel="import" href="packages/dartdoc_viewer/components/main.html">
   <script src="packages/browser/interop.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dart API Reference</title>
@@ -22,5 +22,5 @@
 <body>
   <dartdoc-main id="dartdoc-main"></dartdoc-main>
   <script src="static/js/prettify.js"></script>
-  <script type="application/dart" src="app.dart"></script>
+  <script type="application/dart">export "package:dartdoc_viewer/app.dart";</script>
 </body>
