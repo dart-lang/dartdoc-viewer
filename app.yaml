@@ -2,7 +2,7 @@
 # for details. All rights reserved. Use of this source code is governed by a
 # BSD-style license that can be found in the LICENSE file.
 
-application: dartdoc-next
+application: angulardartdocs
 version: test
 
 runtime: python27
@@ -11,18 +11,14 @@ threadsafe: true
 
 handlers:
 - url: /static
-  static_dir: client/web/static
+  static_dir: client/build/web/static
   
 - url: /
-  static_files: client/out/web/index.html
-  upload: out/web/index.html
-
-- url: /docs/.*
-  script: scripts.redirector.application
+  static_files: client/build/web/index.html
+  upload: client/build/web/index.html
 
 - url: /
-  static_dir: client/out/web
+  static_dir: client/build/web
 
 skip_files:
-- ^(.*/)?docs/?
-- out/web/*.map
+- build/web/*.map

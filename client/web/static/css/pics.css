@@ -9,7 +9,7 @@ polymer stabilizes.
 }
 
 .header-logo {
-  background-image: url('../dart-logo-small.png');
+  background-image: url('../angulardart-logo-small.png');
   width: 66px;
   height: 44px;
   float: left;
@@ -141,7 +141,7 @@ background-image: url('../method_private.png');
 
 .search-result:focus,
 .search-result:hover {
-  background-color: #357ebd;
+  background-color: #DD1B16;
 }
 
 .search-result:focus #result-name,
@@ -189,7 +189,6 @@ background-image: url('../method_private.png');
 .page-header > h1 {
   font-size: 42px;
   line-height: 52px;
-  color: #0489c3;
 }
 
 
@@ -246,9 +245,9 @@ background-image: url('../method_private.png');
 }
 
 .header-logo {
-  background-image: url('../dart-logo.png');
+  background-image: url('../angulardart-logo.png');
   background-repeat: no-repeat;
-  width: 116px !important;
+  width: 151px !important;
   height: 31px !important;
   float: left;
   margin: 15px !important;
