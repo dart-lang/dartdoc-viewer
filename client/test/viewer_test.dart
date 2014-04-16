@@ -700,11 +700,10 @@ Library1.Class.from constructor''';
     classA.loadValues(loadYaml(clazzA));
     classB.loadValues(loadYaml(clazzB));
 
-    expect(pageIndex[firstAnnotation.link.location], equals(classB));
-    expect(pageIndex[secondAnnotation.link.location], equals(classA));
+    expect(pageIndex[firstAnnotation.link.location], equals(classA));
+    expect(pageIndex[secondAnnotation.link.location], equals(classB));
 
-    expect(firstAnnotation.parameters.first, isNotNull);
-    expect(firstAnnotation.parameters[1], isNotNull);
+    expect(firstAnnotation.parameters, isEmpty);
   });
 
   // Test that generic types link to the proper types.
