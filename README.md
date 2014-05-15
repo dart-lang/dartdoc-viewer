@@ -1,4 +1,4 @@
-dart-api-app
+dartdoc-viewer
 ==========
 
 The front-end Dart documentation viewer.
@@ -54,14 +54,11 @@ There are two ways to run the viewer locally:
    are retrieved from the client/local folder instead of the client/docs folder.
    You must manually rename your 'docs' directory to 'local' for the server to 
    correctly retrieve your files.
-   - If you intend to view documentation in a browser other than Dartium, you 
-   will first have to compile the viewer to JavaScript. This can be done by 
-   running `sdk/bin/dart2js` from the Dart repository on `client/web/app.dart`.
  2. In the Dart Editor, the viewer can be run by running 
- `dart client/build.dart` and then running `index.html` from the 
- `client/web/out/` folder. Be sure to have a working version of YAML 
+ `dart client/deploy.dart` and then running `index.html` from the 
+ `client/out/` folder. Be sure to have a working version of YAML 
   or JSON documentation from [Generating YAML Files](#generation). These files 
- should be put in a folder named 'docs' located in the client/ folder.
+ should be put in a folder named 'docs' located in the `client/out` folder.
    
 
 ### Pushing to App Engine
